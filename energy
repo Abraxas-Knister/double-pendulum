@@ -1,0 +1,7 @@
+set term png
+set xlabel "Time, a.u."
+set ylabel "Error in Energy"
+set log y
+stats 'pendata' u 1:6 nooutput
+set out 'energy.png'
+pl 'pendata' u 1:(abs($6-STATS_mean_y)) w l t ''
