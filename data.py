@@ -8,7 +8,7 @@ def eom(x):
     det_i = 1./((1+eps)*eps - eps*eps*cd*cd)
     f_dot = det_i * (eps*p - eps*cd*q)
     t_dot = det_i * ((1.+eps)*q - eps*cd*p)
-    p_dot = -eps*f_dot*t_dot*sin(f-t) - (1+eps)*sin(t) 
+    p_dot = -eps*f_dot*t_dot*sin(f-t) - (1+eps)*sin(f) 
     q_dot = eps*f_dot*t_dot * sin(f-t) - sin(t)*eps
     return array((f_dot,t_dot,p_dot,q_dot))
 
