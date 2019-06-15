@@ -1,7 +1,7 @@
 .PHONY:
 .PHONY: all
 all:
-	mkdir pend
+	mkdir -p pend
 	rm -f pend/*
 	python3 data.py
 	gnuplot frames

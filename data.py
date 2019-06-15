@@ -8,7 +8,7 @@ def eom(x):
     det_i = 1./((1+eps)*eps - eps*eps*cd*cd)
     f_dot = det_i * (eps*p - eps*cd*q)
     t_dot = det_i * ((1.+eps)*q - eps*cd*p)
-    p_dot = -eps*f_dot*t_dot*sin(f-t) - (1+eps)*sin(f) 
+    p_dot = -eps*f_dot*t_dot*sin(f-t) - (1+eps)*sin(f) # the last sine should have 'f' as argument 
     q_dot = eps*f_dot*t_dot * sin(f-t) - sin(t)*eps
     return array((f_dot,t_dot,p_dot,q_dot))
 
@@ -29,9 +29,9 @@ def draw(p):
     t = p[:,0]
     f = p[:,1]
     t = p[:,2]
-    x1 = -sin(f)
+    x1 = sin(f)
     y1 = -cos(f)
-    x2 = x1-sin(t)
+    x2 = x1+sin(t)
     y2 = y1-cos(t)
     savetxt('pendata',array((t,x1,y1,x2,y2)).T)
 
