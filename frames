@@ -1,0 +1,19 @@
+#!/usr/bin/env gnuplot
+# vim: nospell
+set term png
+f = 'pendata'
+stats f nooutput
+set size ratio -1
+unset xtics
+unset ytics
+set xr [-2.1:2.1] 
+set yr [-2.1:2.1] 
+$z << EOD
+0 0 
+EOD
+do for [i=1:int(STATS_records):10] {
+set out sprintf('pend/%06d.png',i);
+plot f u 2:3 every ::i::i+10 w p pt 7 ps 0.9 lc rgb 0x800000 t '',\
+     for [j=1:20] f u 4:5 every ::i+j::i+j w p pt 7 ps 0.9 lc rgb 0xff-6*j  t '',\
+     $z w p pt 7 ps 0.9 lc rgb 0x0 t ''
+} 
