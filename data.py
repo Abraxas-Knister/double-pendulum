@@ -43,4 +43,4 @@ def draw(p,E):
     y2 = y1-cos(t)
     savetxt('pendata',array((s,x1,y1,x2,y2,E)).T)
 
-draw(*rk4(array((3.141,3.141,0,0)),20000))
+draw(*rk4(array((3.141,3.141,0,0)),50000))

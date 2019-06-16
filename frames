@@ -32,7 +32,7 @@ set arrow 1 from 0,0 to xi,yi     nohead lw 1.8 lc rgb 0x0
 set arrow 2 from xi,yi to xii,yii nohead lw 1.8 lc rgb 0x0
 plot \
      $z w p pt 7 ps 1.3 lc rgb 0x0,\
-     f u 4:5 every ::(i-300>0?i-300:0)::i w l lw 0.1 lc rgb 0x0 ,\
+     f u 4:5 every ::(i-500>0?i-500:0)::i w l lw 0.1 lc rgb 0x0 ,\
      for [k=0:14] f u 2:3 every ::i+k::i+k w p pt 7 ps k*0.05+0.6 lc rgb 0xff0000-6*k*0x10000,\
      for [j=0:14] f u 4:5 every ::i+j::i+j w p pt 7 ps j*0.05+0.6 lc rgb 0xff-6*j ;
 } 
