@@ -1,19 +1,39 @@
 #!/usr/bin/env gnuplot
 # vim: nospell
-set term png
+
+# this has to apperar before range definitions
 f = 'pendata'
-stats f nooutput
+stats f u 2:2 nooutput # get access to STATS_records
+
+# style
+set term gif animate delay 9
+set style fill empty border lc rgb 0x8000
+set object circle center 0,0 size 2.05 lw 2
+unset border
 set size ratio -1
 unset xtics
 unset ytics
+set key off
 set xr [-2.1:2.1] 
 set yr [-2.1:2.1] 
+
+# zero coordinate
 $z << EOD
 0 0 
 EOD
-do for [i=1:int(STATS_records):10] {
-set out sprintf('pend/%06d.png',i);
-plot f u 2:3 every ::i::i+10 w p pt 7 ps 0.9 lc rgb 0x800000 t '',\
-     for [j=1:20] f u 4:5 every ::i+j::i+j w p pt 7 ps 0.9 lc rgb 0xff-6*j  t '',\
-     $z w p pt 7 ps 0.9 lc rgb 0x0 t ''
+
+set out 'pendulum.gif'
+do for [i=0:int(STATS_records)-15:15] {
+set table $trash
+plot f u (xi=$2):(yi=$3) every::i+14::i+14;
+plot f u (xii=$4):(yii=$5) every::i+14::i+14;
+unset table;
+set arrow 1 from 0,0 to xi,yi     nohead lw 1.8 lc rgb 0x0
+set arrow 2 from xi,yi to xii,yii nohead lw 1.8 lc rgb 0x0
+plot \
+     $z w p pt 7 ps 1.3 lc rgb 0x0,\
+     f u 4:5 every ::(i-300>0?i-300:0)::i w l lw 0.1 lc rgb 0x0 ,\
+     for [k=0:14] f u 2:3 every ::i+k::i+k w p pt 7 ps k*0.05+0.6 lc rgb 0xff0000-6*k*0x10000,\
+     for [j=0:14] f u 4:5 every ::i+j::i+j w p pt 7 ps j*0.05+0.6 lc rgb 0xff-6*j ;
 } 
+set out

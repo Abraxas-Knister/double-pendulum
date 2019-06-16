@@ -5,6 +5,11 @@ https://www.reddit.com/r/Physics/comments/c0m0bg/programmed_a_simulation_of_the_
 now I've made a git repo out of it because people wanted it.
 
 Have fun!
-Double Pendulum is nice!
 
-Try out doing a rollback to first commit if you want to see some very interesting movements =]
+Try out doing a rollback to first commit if you want to see some very interesting movements =] There the EOM
+weren't exact so one can see some really strange accelerations.
+
+Req:
+python3 for data, gnuplot for the gif, make
+
+PS: View commit messages.
