@@ -1,10 +1,16 @@
-set term png
-set xlabel "Time, a.u."
-set ylabel "Error in Energy, Powers of 10"
+# vim: nospell
+set term cairolatex standalone size 12 cm, 10 cm
+set xlabel "Time, unit is $(l/g)^{1/2}$"
+set ylabel "Rel. Err. ,Powers of 10"
 set log y
 set format y '%L'
-set rmargin at screen .75
-set label at screen .77,.8 left "The time unit\n is 600 ms,\n this is \n equal to\n sqrt(l/g)"
-stats 'pendata' u 1:6 nooutput
-set out 'energy.png'
-pl 'pendata' u 1:(abs($6-STATS_mean_y)) w l t ''
+set ytics nomirror
+set y2label "Energy, a.u."
+set y2tics autofreq
+set format y2 ''
+set key tmargin maxrow 1 samplen 2
+set table $trash
+plot 'pendata' u 1:(E=$6) every ::0::0
+unset table
+set out 'energy.tex'
+pl 'pendata' u 1:(abs(($6-E)/E)) w l lc rgb 0x80 t 'Rel. Err.', '' u 1:($6-E) ax x1y2 w l lc rgb 0x800000 t 'Energy'
